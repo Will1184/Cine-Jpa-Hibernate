@@ -19,6 +19,6 @@ public class Premio {
     @Column(name = "codPremio")
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "Premio ")
     private String premio;
 }

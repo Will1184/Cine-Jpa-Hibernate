@@ -22,7 +22,7 @@ public class Actor {
     @Column(name = "CodActor")
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "Nombre")
     private String nombre;
 
     @Column(name = "FNacimiento")
@@ -30,11 +30,20 @@ public class Actor {
     @Column(name = "LNacimiento")
     private String lugarNacimiento;
 
+    @Column(name = "Nacionalidad")
     private String nacionalidad;
 
     @Column(name = "FMuerte")
     private LocalDateTime fechaMuerte;
     @Column(name = "LMuerte")
     private String lugarMuerte;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "Participas",
+            joinColumns = @JoinColumn(name = "CodActor"),
+            inverseJoinColumns = @JoinColumn(name = "CodPelicula"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"CodPelicula", "CodActor"})
+    )
+    private  Pelicula pelicula;
 
 }

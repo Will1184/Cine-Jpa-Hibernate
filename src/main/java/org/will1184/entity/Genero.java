@@ -17,6 +17,8 @@ public class Genero {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "CodGenero")
     private Integer id;
+    
+    @Column(name = "Genero")
     private String genero;
 
     @Override

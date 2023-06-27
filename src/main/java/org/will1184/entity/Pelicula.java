@@ -23,29 +23,38 @@ public class Pelicula {
     @Column(name = "CodPelicula")
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "Titulo")
     private String titulo;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "Anyo")
     private String anyo;
 
+    @Column(name = "Nacionalidad")
     private String nacionalidad;
+    @Column(name = "Duracion")
     private Float duracion;
+    @Column(name = "FechaEstreno")
     private LocalDateTime fechaEstreno;
-    @OneToOne
-    @JoinColumn(name = "genero")
-    private Genero genero;
-
+    @Column(name = "Taquilla")
     private Double taquilla;
+    @Column(name = "Productora")
     private String productora;
+    @Column(name = "Distribuidora")
     private String Distribuidora;
 
     @OneToOne
-    @JoinColumn(name = "director")
+    @JoinColumn(name = "Genero")
+    private Genero genero;
+
+    @OneToOne
+    @JoinColumn(name = "Director")
     private  Director director;
 
-//    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
-//    @JoinTable(name = "Participas",joinColumns = @JoinColumn(name = "CodPelicula")
-//            , inverseJoinColumns = @JoinColumn(name = "CodActor")
-//            ,uniqueConstraints = @UniqueConstraint(columnNames = {"CodActor","CodPelicula"}))
-//    private List<Actor> actor = new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "Participas",
+            joinColumns = @JoinColumn(name = "CodPelicula"),
+            inverseJoinColumns = @JoinColumn(name = "CodActor"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"CodActor", "CodPelicula"})
+    )
+    private  Actor actor;
 }

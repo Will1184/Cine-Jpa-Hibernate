@@ -21,7 +21,7 @@ public class Director {
     @Column(name = "CodDirector")
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "Nombre")
     private String nombre;
 
     @Column(name = "FNacimiento")
@@ -29,6 +29,7 @@ public class Director {
     @Column(name = "LNacimiento")
     private String lugarNacimiento;
 
+    @Column(name = "Nacionalidad")
     private String nacionalidad;
 
     @Column(name = "FMuerte")

@@ -26,7 +26,7 @@ public class GanaPremio {
     @JoinColumn (name = "CodPremio")
     private Premio premio;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name = "Anyo")
     private Integer anyo;
 
     @Override
