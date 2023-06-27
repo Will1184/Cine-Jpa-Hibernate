@@ -15,14 +15,14 @@ import lombok.NoArgsConstructor;
 public class Genero {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CodGenero")
+    @Column(name = "IdGenero")
     private Integer id;
     
-    @Column(name = "Genero")
-    private String genero;
+    @Column(name = "Nombre")
+    private String nombre;
 
     @Override
     public String toString() {
-        return genero;
+        return nombre;
     }
 }

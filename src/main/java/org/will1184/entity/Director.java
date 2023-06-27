@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Data
@@ -36,4 +37,18 @@ public class Director {
     private LocalDateTime fechaMuerte;
     @Column(name = "LMuerte")
     private String lugarMuerte;
+
+    @Override
+    public String toString() {
+        DateTimeFormatter dtformat = DateTimeFormatter.ofPattern("dd,MM,yyyy");
+        String formattedFechaNacimiento = (fechaNacimiento != null) ? fechaNacimiento.format(dtformat) : null;
+        String formattedFechaMuerte = (fechaMuerte != null) ? fechaMuerte.format(dtformat) : null;
+        return "id: "+id+
+                ", nombre: " + nombre+
+                ", fechaNacimiento: " + formattedFechaNacimiento +
+                ", lugarNacimiento: " + lugarNacimiento +
+                ", nacionalidad: " + nacionalidad +
+                ", fechaMuerte: " + formattedFechaMuerte +
+                ", lugarMuerte: " + lugarMuerte;
+    }
 }

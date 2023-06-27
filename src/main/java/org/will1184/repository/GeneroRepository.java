@@ -38,7 +38,7 @@ public class GeneroRepository implements CrudRepository<Genero>{
     public void editar(Integer id) {
         Genero genero= porId(id);
         if(genero.getId()!=null && genero.getId()>0){
-            genero.setGenero(JOptionPane.showInputDialog("Ingrese Genero de pelicula: ",genero.getGenero()));
+            genero.setNombre(JOptionPane.showInputDialog("Ingrese Genero de pelicula: ",genero.getNombre()));
             manager.merge(genero);
         }
     }

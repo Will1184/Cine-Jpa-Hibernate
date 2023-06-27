@@ -2,19 +2,21 @@ package org.will1184.service;
 
 import jakarta.persistence.EntityManager;
 import org.will1184.entity.Pelicula;
-import org.will1184.repository.CrudRepository;
-import org.will1184.repository.PeliculaRepository;
+import org.will1184.repository.*;
 
 import java.util.List;
-import java.util.Optional;
 
 public class PeliculaServiceImpl implements PeliculaService{
     private final EntityManager manager;
     private CrudRepository<Pelicula> repository;
+    private CambioMonedaRepository monedaRepository;
+    private BusquedaEnPeliculaRepository peliculaRepository;
 
     public PeliculaServiceImpl(EntityManager manager) {
         this.manager = manager;
         this.repository= new PeliculaRepository(manager);
+        this.monedaRepository= new PeliculaRepository(manager);
+        this.peliculaRepository= new PeliculaRepository(manager);
     }
 
     @Override
@@ -24,9 +26,9 @@ public class PeliculaServiceImpl implements PeliculaService{
     }
 
     @Override
-    public Optional<Pelicula> porId(Integer id) {
+    public Pelicula porId(Integer id) {
         System.out.println("=====BUSQUEDA DE PELICULA POR ID====");
-        return Optional.ofNullable(repository.porId(id));
+        return repository.porId(id);
     }
 
     @Override
@@ -72,5 +74,42 @@ public class PeliculaServiceImpl implements PeliculaService{
             manager.getTransaction().rollback();
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void cambiarMonedaPorPais(Pais pais, TipoMoneda moneda) {
+        try {
+            System.out.println("=====CAMBIO MONEDA====");
+            manager.getTransaction().begin();
+            monedaRepository.cambiarMonedaPorPais(pais,moneda);
+            manager.getTransaction().commit();
+        }catch (Exception e){
+            manager.getTransaction().rollback();
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String distribuidora(String pelicula) {
+      return peliculaRepository.distribuidora(pelicula);
+    }
+
+    @Override
+    public List<Object[]> peliculaPorNacion() {
+        return peliculaRepository.peliculaPorNacion();
+    }
+    @Override
+    public List<Object[]> peliculaPorNacion(String nacion) {
+        return peliculaRepository.peliculaPorNacion(nacion);
+    }
+
+    @Override
+    public List<Object[]> recaudacionPeliculasNacion(String nacion) {
+        return peliculaRepository.recaudacionPeliculasNacion(nacion);
+    }
+
+    @Override
+    public List<Object[]> peliculaConcatenandoAnyo() {
+        return peliculaRepository.peliculaConcatenandoAnyo();
     }
 }

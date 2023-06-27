@@ -2,7 +2,9 @@ package org.will1184.service;
 
 import jakarta.persistence.EntityManager;
 import org.will1184.entity.Actor;
+import org.will1184.exception.DatosInvalidosException;
 import org.will1184.repository.ActorRepository;
+import org.will1184.repository.BusquedaActorRepository;
 import org.will1184.repository.CrudRepository;
 
 import javax.swing.*;
@@ -13,9 +15,11 @@ public class ActorServiceImpl implements ActorService{
 
     private final EntityManager manager;
     private CrudRepository<Actor> repository;
+    private BusquedaActorRepository busquedaActorRepository;
     public ActorServiceImpl(EntityManager manager) {
         this.manager = manager;
         this.repository= new ActorRepository(manager);
+        this.busquedaActorRepository= new ActorRepository(manager);
     }
 
     @Override
@@ -40,10 +44,12 @@ public class ActorServiceImpl implements ActorService{
 //            System.out.println("=====ACTOR GUARDADO====");
         }catch (Exception e){
 //            System.out.println("=====ACTOR NO GUARDADO====");
-            JOptionPane.showConfirmDialog(null,"Error en la entrada de datos","CLOSED_OPTION", JOptionPane.OK_CANCEL_OPTION,
-                    JOptionPane.INFORMATION_MESSAGE);
             manager.getTransaction().rollback();
             e.printStackTrace();
+            JOptionPane.showConfirmDialog(null,"Error en la entrada de datos","CLOSED_OPTION", JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE);
+            throw new DatosInvalidosException("Datos introducidos son invalidos");
+
         }
     }
 
@@ -76,5 +82,10 @@ public class ActorServiceImpl implements ActorService{
             manager.getTransaction().rollback();
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Actor> actorListDeadPorNacion(String nacion) {
+        return busquedaActorRepository.actorListDeadPorNacion(nacion) ;
     }
 }

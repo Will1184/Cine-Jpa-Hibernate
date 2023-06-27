@@ -21,4 +21,9 @@ public class Premio {
 
     @Column(nullable = false,name = "Premio ")
     private String premio;
+
+    @Override
+    public String toString() {
+        return "Premio:" + premio;
+    }
 }

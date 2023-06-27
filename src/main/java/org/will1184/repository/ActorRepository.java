@@ -1,14 +1,18 @@
 package org.will1184.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import org.will1184.entity.Actor;
+import org.will1184.entity.Director;
+import org.will1184.entity.Participa;
 
 import javax.swing.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class ActorRepository implements CrudRepository<Actor>{
+public class ActorRepository implements CrudRepository<Actor>,BusquedaActorRepository{
     private final EntityManager manager;
 
     public ActorRepository(EntityManager manager) {
@@ -62,4 +66,21 @@ public class ActorRepository implements CrudRepository<Actor>{
         Actor actor = porId(id);
         manager.remove(actor);
     }
+
+    @Override
+    public List<Actor> actorListDeadPorNacion(String nacionalidad) {
+        Query query = manager.createQuery("SELECT a FROM Actor a WHERE a.nacionalidad = :nacionalidad AND a.fechaMuerte IS NOT NULL");
+        query.setParameter("nacionalidad", nacionalidad);
+        List<Actor> actoresFallecidos = query.getResultList();
+        return actoresFallecidos;
+    }
+
+
+
+
+    @Override
+    public Actor actorMayorParticipacion() {
+        return null;
+    }
+
 }

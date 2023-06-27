@@ -11,4 +11,5 @@ public interface ActorService {
     void guardar(Actor actor);
     Actor editar(Integer id);
     void eliminar(Integer id);
+    List<Actor> actorListDeadPorNacion(String nacion);
 }

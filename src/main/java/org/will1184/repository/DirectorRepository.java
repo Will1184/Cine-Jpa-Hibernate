@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class DirectorRepository implements CrudRepository<Director>{
+public class DirectorRepository implements CrudRepository<Director>,BusquedaDirectorRepository{
     private final EntityManager manager;
 
     public DirectorRepository(EntityManager manager) {
@@ -62,5 +62,20 @@ public class DirectorRepository implements CrudRepository<Director>{
     public void eliminar(Integer id) {
         Director director = porId(id);
         manager.remove(director);
+    }
+
+    @Override
+    public Director directorMayorParticipacion() {
+        return null;
+    }
+
+    @Override
+    public Director directorParticipaciones(int participaciones) {
+        return null;
+    }
+
+    @Override
+    public Director directorSinParticipaciones() {
+        return null;
     }
 }

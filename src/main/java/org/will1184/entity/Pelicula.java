@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class Pelicula {
     @Column(name = "Productora")
     private String productora;
     @Column(name = "Distribuidora")
-    private String Distribuidora;
+    private String distribuidora;
 
     @OneToOne
     @JoinColumn(name = "Genero")
@@ -49,12 +50,19 @@ public class Pelicula {
     @JoinColumn(name = "Director")
     private  Director director;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "Participas",
-            joinColumns = @JoinColumn(name = "CodPelicula"),
-            inverseJoinColumns = @JoinColumn(name = "CodActor"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"CodActor", "CodPelicula"})
-    )
-    private  Actor actor;
+    @Override
+    public String toString() {
+        DateTimeFormatter dtformat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return "Id: "+id +
+                ", Titulo: " + titulo +
+                ", anyo: " + anyo +
+                ", nacionalidad: " + nacionalidad +
+                ", duracion: " +duracion +
+                ", fechaEstreno: " + fechaEstreno.format(dtformat) +
+                ", taquilla: " + taquilla +
+                ", productora: " + productora +
+                ", Distribuidora: " + distribuidora +
+                ", genero: " + genero +
+                ", director: " + director;
+    }
 }
