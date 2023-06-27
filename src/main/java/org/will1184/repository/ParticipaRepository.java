@@ -1,10 +1,15 @@
 package org.will1184.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import org.will1184.entity.Actor;
 import org.will1184.entity.Participa;
+import org.will1184.service.ActorService;
+import org.will1184.service.ActorServiceImpl;
 
 
+import javax.swing.*;
 import java.util.List;
 
 public class ParticipaRepository implements CrudRepository<Participa>, FindIdRepository<Participa> {
@@ -23,15 +28,15 @@ public class ParticipaRepository implements CrudRepository<Participa>, FindIdRep
 
     @Override
     public Participa porId(Integer id) {
-        return manager.find(Participa.class,id);
+        return manager.find(Participa.class, id);
     }
 
 
     @Override
     public void guardar(Participa participa) {
-        if (participa.getPelicula()!=null && participa.getActor()!=null){
+        if (participa.getPelicula() != null && participa.getActor() != null) {
             manager.merge(participa);
-        }else {
+        } else {
             manager.persist(participa);
         }
     }
@@ -43,14 +48,47 @@ public class ParticipaRepository implements CrudRepository<Participa>, FindIdRep
 
     @Override
     public void eliminar(Integer id) {
-        Participa participa = porId(id);
+
+    }
+
+    @Override
+    public void eliminar(Integer id,TipoBusqueda busqueda) {
+        TypedQuery query = null;
+        if (busqueda == TipoBusqueda.POR_ACTOR) {
+            System.out.println("=====ELIMINAR ID ACTOR====");
+            query = manager.createQuery(
+                    "DELETE  FROM Participa pa WHERE pa.actor.id=:id  ",
+                    Participa.class
+            );
+        }
+        if (busqueda == TipoBusqueda.POR_PELICULA) {
+            System.out.println("=====ELIMINAR  ID PELICULA====");
+            query = manager.createQuery(
+                    "DELETE  FROM Participa pa WHERE pa.pelicula.id=:id  ",
+                    Participa.class
+            );
+        }
+        query.setParameter("id", id);
+    }
+
+    @Override
+    public void eliminarUnique(Integer id1, Integer id2) {
+
+            System.out.println("=====BUSQUEDA DE PARTICIPA POR ID PELICULA====");
+            Query query = manager.createQuery(
+                    "SELECT pa FROM Participa pa WHERE pa.pelicula.id=:id1 AND pa.actor.id=:id2",
+                    Participa.class
+            );
+        query.setParameter("id1", id1);
+        query.setParameter("id2", id2);
+        Participa participa= (Participa) query.getSingleResult();
         manager.remove(participa);
     }
 
 
     @Override
-    public List<Participa> listarId(Integer id,TipoBusqueda busqueda) {
-        TypedQuery query;
+    public List<Participa> listarPorId(Integer id, TipoBusqueda busqueda) {
+        TypedQuery query = null;
         if (busqueda == TipoBusqueda.POR_ACTOR) {
             System.out.println("=====BUSQUEDA DE PARTICIPA POR ID ACTOR====");
             query = manager.createQuery(
@@ -65,10 +103,15 @@ public class ParticipaRepository implements CrudRepository<Participa>, FindIdRep
                             " pa.actor p WHERE pa.pelicula.id = :id",
                     Participa.class
             );
-        } else {
-            throw new IllegalArgumentException("Tipo de búsqueda no válido");
         }
-        query.setParameter("id",id);
+        query.setParameter("id", id);
         return query.getResultList();
     }
+
+    @Override
+    public void porId(Integer id, TipoBusqueda tipoBusqueda) {
+
+    }
+
 }
+

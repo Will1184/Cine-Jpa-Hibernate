@@ -2,6 +2,7 @@ package org.will1184.service;
 
 import jakarta.persistence.EntityManager;
 import org.will1184.entity.Participa;
+import org.will1184.exception.DataException;
 import org.will1184.repository.CrudRepository;
 import org.will1184.repository.FindIdRepository;
 import org.will1184.repository.ParticipaRepository;
@@ -27,9 +28,18 @@ public class ParticipaServiceImpl implements ParticipaService{
     }
 
     @Override
-    public List<Participa> porId(Integer id, TipoBusqueda busqueda) {
-         List<Participa> list = (List<Participa>) idRepository.listarId(id,busqueda);
-        return list;
+    public List listarPorId(Integer id, TipoBusqueda busqueda) {
+        try {
+            return idRepository.listarPorId(id,busqueda);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new DataException("Datos introducidos son invalidos");
+        }
+    }
+
+    @Override
+    public void porId(Integer id, TipoBusqueda busqueda){
+
     }
 
 
@@ -50,7 +60,7 @@ public class ParticipaServiceImpl implements ParticipaService{
     }
 
     @Override
-    public void editar(Integer id) {
+    public void editar(Integer id, TipoBusqueda tipoBusqueda) {
 
     }
 
@@ -60,6 +70,21 @@ public class ParticipaServiceImpl implements ParticipaService{
             System.out.println("=====ELIMINAR PARTICIPA====");
             manager.getTransaction().begin();
             repository.eliminar(id);
+            manager.getTransaction().commit();
+//            System.out.println("=====PARTICIPA ELIMINADO====");
+        }catch (Exception e){
+//            System.out.println("=====PARTICIPA NO ELIMINADO====");
+            manager.getTransaction().rollback();
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void eliminarUnique(Integer id1, Integer id2) {
+        try {
+            System.out.println("=====ELIMINAR ACTOR EN PELICULA====");
+            manager.getTransaction().begin();
+            idRepository.eliminarUnique(id1,id2);
             manager.getTransaction().commit();
 //            System.out.println("=====PARTICIPA ELIMINADO====");
         }catch (Exception e){

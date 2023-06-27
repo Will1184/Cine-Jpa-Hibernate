@@ -9,8 +9,10 @@ import java.util.List;
 
 public interface ParticipaService {
     List<Participa> listar();
-    List<Participa> porId(Integer id, TipoBusqueda busqueda);
+    List listarPorId(Integer id, TipoBusqueda busqueda);
+    void porId(Integer id, TipoBusqueda busqueda);
     void guardar(Participa participa);
-    void editar(Integer id);
+    void editar(Integer id,TipoBusqueda tipoBusqueda);
     void eliminar(Integer id);
+    void eliminarUnique(Integer id1,Integer id2);
 }

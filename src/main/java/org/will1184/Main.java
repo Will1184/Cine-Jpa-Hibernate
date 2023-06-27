@@ -14,8 +14,8 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         EntityManager manager= JpaUtil.getEntityManager();
-        DirectorService service = new DirectorServiceImpl(manager);
 
+        DirectorService service = new DirectorServiceImpl(manager);
         Director director = new Director();
         director.setNombre("George");
         service.guardar(director);
@@ -81,11 +81,16 @@ public class Main {
 
         List<Participa> listPar=servicePa.listar();
         listPar.forEach(System.out::println);
-        List<Participa> participaList = servicePa.porId(actor.getId(),TipoBusqueda.POR_ACTOR);
+        List<Participa> participaList = servicePa.listarPorId(actor.getId(),TipoBusqueda.POR_ACTOR);
         participaList.forEach(System.out::println);
 
-        participaList = servicePa.porId(pelicula.getId(), TipoBusqueda.POR_PELICULA);
+        participaList = servicePa.listarPorId(pelicula.getId(), TipoBusqueda.POR_PELICULA);
         participaList.forEach(System.out::println);
+
+        servicePa.eliminarUnique(pelicula.getId(),actor.getId());
+        listPar=servicePa.listar();
+        listPar.forEach(System.out::println);
+
 
         manager.close();
 

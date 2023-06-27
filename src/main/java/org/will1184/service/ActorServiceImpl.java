@@ -2,7 +2,6 @@ package org.will1184.service;
 
 import jakarta.persistence.EntityManager;
 import org.will1184.entity.Actor;
-import org.will1184.entity.Director;
 import org.will1184.repository.ActorRepository;
 import org.will1184.repository.CrudRepository;
 
@@ -49,7 +48,7 @@ public class ActorServiceImpl implements ActorService{
     }
 
     @Override
-    public void editar(Integer id) {
+    public Actor editar(Integer id) {
         try {
             System.out.println("=====EDITAR EMPLEADO====");
             manager.getTransaction().begin();
@@ -61,6 +60,7 @@ public class ActorServiceImpl implements ActorService{
             manager.getTransaction().rollback();
             e.printStackTrace();
         }
+        return null;
     }
 
     @Override
