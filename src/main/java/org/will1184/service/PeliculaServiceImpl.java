@@ -102,7 +102,7 @@ public class PeliculaServiceImpl implements PeliculaService{
     }
     @Override
     public List<Object[]> peliculaPorNacion(String nacion) {
-        System.out.println("===== LISTA DE CANTIDAD DE PELICULAS POR NACION"+nacion.toUpperCase()+"====");
+        System.out.println("===== LISTA DE CANTIDAD DE PELICULAS POR NACION "+nacion.toUpperCase()+"====");
         return peliculaRepository.peliculaPorNacion(nacion);
     }
 

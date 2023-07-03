@@ -77,13 +77,20 @@ public class Main {
         participaList=participaService.listarPorId(10,TipoBusqueda.POR_PELICULA);
         participaList.forEach(System.out::println);
 
-        //Busqueda de participaciones por nacion
+        //Busqueda de participaciones de naciones
        resultados=peliculaService.peliculaPorNacion();
        resultados.forEach(objects -> {
            String nacionalidad = (String) objects[0];
            Long participaciones = (Long) objects[1];
            System.out.println("Naciones: "+nacionalidad+" participaciones: "+participaciones);
        });
+        //Busqueda de participaciones por nacion
+        resultados=peliculaService.peliculaPorNacion("España");
+        resultados.forEach(objects -> {
+            String nacionalidad = (String) objects[0];
+            Long participaciones = (Long) objects[1];
+            System.out.println("Naciones: "+nacionalidad+" participaciones: "+participaciones);
+        });
 
         // Obtener todas las películas concatenando el título con el año y la nacionalidad
         resultados = peliculaService.peliculaConcatenandoAnyo("España");
