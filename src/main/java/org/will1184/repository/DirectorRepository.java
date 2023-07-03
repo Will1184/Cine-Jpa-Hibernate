@@ -1,6 +1,8 @@
 package org.will1184.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import org.will1184.entity.Director;
 
 import javax.swing.*;
@@ -70,12 +72,17 @@ public class DirectorRepository implements CrudRepository<Director>,BusquedaDire
     }
 
     @Override
-    public Director directorParticipaciones(int participaciones) {
-        return null;
+    public List<Object[]> directorParticipaciones(Long participaciones) {
+        Query query = manager.createQuery("SELECT p.director , count(p)FROM Pelicula p GROUP BY p.director Having COUNT(p)=:participaciones ");
+        query.setParameter("participaciones",participaciones);
+        List<Object[]> results = query.getResultList();
+        return results;
     }
 
     @Override
-    public Director directorSinParticipaciones() {
-        return null;
+    public List<Director> directorSinParticipaciones() {
+        TypedQuery query = manager.createQuery("SELECT d FROM Director d WHERE d NOT IN (SELECT p.director FROM Pelicula p)",Director.class);
+        List<Director> directors= query.getResultList();
+        return directors;
     }
 }

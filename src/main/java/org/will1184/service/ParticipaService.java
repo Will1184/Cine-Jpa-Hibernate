@@ -15,4 +15,5 @@ public interface ParticipaService {
     void editar(Integer id,TipoBusqueda tipoBusqueda);
     void eliminar(Integer id);
     void eliminarUnique(Integer id1,Integer id2);
+    List<Object[]> actorMayorParticipacion();
 }

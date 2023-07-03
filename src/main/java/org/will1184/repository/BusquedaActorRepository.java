@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BusquedaActorRepository {
     List<Actor> actorListDeadPorNacion(String nacion);
-    Actor actorMayorParticipacion();
+    List<Object[]> actorMayorParticipacion();
 
 
 }

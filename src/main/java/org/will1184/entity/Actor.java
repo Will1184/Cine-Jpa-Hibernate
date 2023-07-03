@@ -38,14 +38,6 @@ public class Actor {
     private LocalDateTime fechaMuerte;
     @Column(name = "LMuerte")
     private String lugarMuerte;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "Participas",
-            joinColumns = @JoinColumn(name = "CodActor"),
-            inverseJoinColumns = @JoinColumn(name = "CodPelicula"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"CodPelicula", "CodActor"})
-    )
-    private  Pelicula pelicula;
 
 
     @Override

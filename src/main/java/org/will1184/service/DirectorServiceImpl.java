@@ -2,6 +2,7 @@ package org.will1184.service;
 
 import jakarta.persistence.EntityManager;
 import org.will1184.entity.Director;
+import org.will1184.repository.BusquedaDirectorRepository;
 import org.will1184.repository.CrudRepository;
 import org.will1184.repository.DirectorRepository;
 
@@ -12,9 +13,11 @@ import java.util.Optional;
 public class DirectorServiceImpl implements DirectorService{
     private final EntityManager manager;
     private CrudRepository<Director> repository;
+    private BusquedaDirectorRepository busquedaDirectorRepository;
     public DirectorServiceImpl(EntityManager manager) {
         this.manager = manager;
         this.repository= new DirectorRepository(manager);
+        this.busquedaDirectorRepository= new DirectorRepository(manager);
     }
 
     @Override
@@ -74,5 +77,15 @@ public class DirectorServiceImpl implements DirectorService{
             manager.getTransaction().rollback();
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Object[]> directorParticipaciones(Long participaciones) {
+        return busquedaDirectorRepository.directorParticipaciones(participaciones);
+    }
+
+    @Override
+    public List<Director> directorSinParticipaciones() {
+        return busquedaDirectorRepository.directorSinParticipaciones();
     }
 }

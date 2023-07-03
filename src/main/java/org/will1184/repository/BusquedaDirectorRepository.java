@@ -2,8 +2,10 @@ package org.will1184.repository;
 
 import org.will1184.entity.Director;
 
+import java.util.List;
+
 public interface BusquedaDirectorRepository {
     Director directorMayorParticipacion();
-    Director directorParticipaciones(int participaciones);
-    Director directorSinParticipaciones();
+    List<Object[]> directorParticipaciones(Long participaciones);
+    List<Director>  directorSinParticipaciones();
 }

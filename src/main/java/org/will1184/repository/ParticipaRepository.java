@@ -12,7 +12,7 @@ import org.will1184.service.ActorServiceImpl;
 import javax.swing.*;
 import java.util.List;
 
-public class ParticipaRepository implements CrudRepository<Participa>, FindIdRepository<Participa> {
+public class ParticipaRepository implements CrudRepository<Participa>, FindIdRepository<Participa> , BusquedaActorRepository{
 
     private final EntityManager manager;
 
@@ -113,5 +113,17 @@ public class ParticipaRepository implements CrudRepository<Participa>, FindIdRep
 
     }
 
+    @Override
+    public List<Actor> actorListDeadPorNacion(String nacion) {
+        return null;
+    }
+
+    @Override
+    public List<Object[]> actorMayorParticipacion() {
+        Query query = manager.createQuery("SELECT pa.actor,count(pa)FROM Participa pa GROUP BY pa.actor ORDER BY count(pa) DESC ");
+        query.setMaxResults(1);
+        List<Object[]> results = query.getResultList();
+        return results;
+    }
 }
 

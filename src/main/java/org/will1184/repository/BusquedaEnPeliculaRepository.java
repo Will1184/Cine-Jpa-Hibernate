@@ -11,4 +11,5 @@ public interface BusquedaEnPeliculaRepository extends BusquedaDistribuidoraRepos
     List<Object[]> peliculaPorNacion(String nacionalidad);
 
     List<Object[]> peliculaConcatenandoAnyo();
+    List<Object[]> peliculaConcatenandoAnyo(String nacion);
 }

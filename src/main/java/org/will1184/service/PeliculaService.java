@@ -19,4 +19,5 @@ public interface PeliculaService {
     List<Object[]> peliculaPorNacion();
 
     List<Object[]> peliculaConcatenandoAnyo();
+    List<Object[]> peliculaConcatenandoAnyo(String pelicula);
 }

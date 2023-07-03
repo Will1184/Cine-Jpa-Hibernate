@@ -79,8 +79,8 @@ public class ActorRepository implements CrudRepository<Actor>,BusquedaActorRepos
 
 
     @Override
-    public Actor actorMayorParticipacion() {
-        return null;
+    public List<Object[]> actorMayorParticipacion() {
+       return null;
     }
 
 }

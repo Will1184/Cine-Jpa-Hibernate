@@ -11,4 +11,6 @@ public interface DirectorService {
     void guardar(Director director);
     void editar(Integer id);
     void eliminar(Integer id);
+    List<Object[]> directorParticipaciones(Long participaciones);
+    List<Director>  directorSinParticipaciones();
 }

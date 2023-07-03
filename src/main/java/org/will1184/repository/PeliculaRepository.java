@@ -120,6 +120,14 @@ public class PeliculaRepository implements CrudRepository<Pelicula>,CambioMoneda
         return resultados;
     }
 
+    @Override
+    public List<Object[]> peliculaConcatenandoAnyo(String nacion) {
+        Query query = manager.createQuery("SELECT p.titulo, p.anyo,CONCAT(p.titulo, ' (', p.anyo, ')'),p.nacionalidad FROM Pelicula p WHERE p.nacionalidad=:nacion");
+        query.setParameter("nacion",nacion);
+        List<Object[]> resultados = query.getResultList();
+        return resultados;
+    }
+
 
     @Override
     public List<Object[]> recaudacionPeliculasNacion(String nacion) {

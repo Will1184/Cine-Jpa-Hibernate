@@ -112,4 +112,8 @@ public class PeliculaServiceImpl implements PeliculaService{
     public List<Object[]> peliculaConcatenandoAnyo() {
         return peliculaRepository.peliculaConcatenandoAnyo();
     }
+    @Override
+    public List<Object[]> peliculaConcatenandoAnyo(String nacion) {
+        return peliculaRepository.peliculaConcatenandoAnyo(nacion);
+    }
 }

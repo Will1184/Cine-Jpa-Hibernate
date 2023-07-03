@@ -3,10 +3,7 @@ package org.will1184.service;
 import jakarta.persistence.EntityManager;
 import org.will1184.entity.Participa;
 import org.will1184.exception.DataException;
-import org.will1184.repository.CrudRepository;
-import org.will1184.repository.FindIdRepository;
-import org.will1184.repository.ParticipaRepository;
-import org.will1184.repository.TipoBusqueda;
+import org.will1184.repository.*;
 
 import java.util.List;
 
@@ -14,11 +11,13 @@ public class ParticipaServiceImpl implements ParticipaService{
     private final EntityManager manager;
     private CrudRepository<Participa> repository;
     private FindIdRepository idRepository;
+    private BusquedaActorRepository busquedaActorRepository;
 
     public ParticipaServiceImpl(EntityManager manager) {
         this.manager = manager;
         this.repository = new ParticipaRepository(manager);
         this.idRepository = new ParticipaRepository(manager);
+        this.busquedaActorRepository = new ParticipaRepository(manager);
     }
 
     @Override
@@ -92,5 +91,10 @@ public class ParticipaServiceImpl implements ParticipaService{
             manager.getTransaction().rollback();
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Object[]> actorMayorParticipacion() {
+        return busquedaActorRepository.actorMayorParticipacion() ;
     }
 }
