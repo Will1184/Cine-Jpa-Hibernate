@@ -28,6 +28,7 @@ public class ParticipaServiceImpl implements ParticipaService{
 
     @Override
     public List listarPorId(Integer id, TipoBusqueda busqueda) {
+        System.out.println("=====LISTAR PARTICIPACION POR ID Y TIPO DE BUSQUEDA====");
         try {
             return idRepository.listarPorId(id,busqueda);
         }catch (Exception e){
@@ -95,6 +96,7 @@ public class ParticipaServiceImpl implements ParticipaService{
 
     @Override
     public List<Object[]> actorMayorParticipacion() {
+        System.out.println("===== ACTOR CON MAYOR PARTICIPACION ====");
         return busquedaActorRepository.actorMayorParticipacion() ;
     }
 }

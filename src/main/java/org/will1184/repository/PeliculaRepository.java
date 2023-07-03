@@ -80,7 +80,6 @@ public class PeliculaRepository implements CrudRepository<Pelicula>,CambioMoneda
         query.setParameter("factorConversion", moneda.getValor());
         query.setParameter("pais", pais.getNacion());
         query.executeUpdate();
-        manager.flush();
     }
 
     @Override

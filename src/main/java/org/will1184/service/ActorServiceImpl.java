@@ -86,6 +86,7 @@ public class ActorServiceImpl implements ActorService{
 
     @Override
     public List<Actor> actorListDeadPorNacion(String nacion) {
+        System.out.println("=====LISTAR ACTORES FALLECIDOS POR NACION: "+nacion.toUpperCase()+" ====");
         return busquedaActorRepository.actorListDeadPorNacion(nacion) ;
     }
 }

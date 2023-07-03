@@ -79,7 +79,7 @@ public class PeliculaServiceImpl implements PeliculaService{
     @Override
     public void cambiarMonedaPorPais(Pais pais, TipoMoneda moneda) {
         try {
-            System.out.println("=====CAMBIO MONEDA====");
+            System.out.println("=====CAMBIO MONEDA POR PAIS A EURO====");
             manager.getTransaction().begin();
             monedaRepository.cambiarMonedaPorPais(pais,moneda);
             manager.getTransaction().commit();
@@ -91,29 +91,35 @@ public class PeliculaServiceImpl implements PeliculaService{
 
     @Override
     public String distribuidora(String pelicula) {
+        System.out.println("===== BUSCAR DISTRIBUIDORA DE "+ pelicula.toUpperCase()+" ====");
       return peliculaRepository.distribuidora(pelicula);
     }
 
     @Override
     public List<Object[]> peliculaPorNacion() {
+        System.out.println("===== LISTA DE CANTIDAD DE PELICULAS POR NACION ====");
         return peliculaRepository.peliculaPorNacion();
     }
     @Override
     public List<Object[]> peliculaPorNacion(String nacion) {
+        System.out.println("===== LISTA DE CANTIDAD DE PELICULAS POR NACION"+nacion.toUpperCase()+"====");
         return peliculaRepository.peliculaPorNacion(nacion);
     }
 
     @Override
     public List<Object[]> recaudacionPeliculasNacion(String nacion) {
+        System.out.println("===== RECAUDACION DE PELICULA POR NACION ====");
         return peliculaRepository.recaudacionPeliculasNacion(nacion);
     }
 
     @Override
     public List<Object[]> peliculaConcatenandoAnyo() {
+        System.out.println("=====ELIMINAR ACTOR====");
         return peliculaRepository.peliculaConcatenandoAnyo();
     }
     @Override
     public List<Object[]> peliculaConcatenandoAnyo(String nacion) {
+        System.out.println("===== PELICULA CONCATENANDO EL ANYO EN EL TITULO Y BUSCADO POR NACION: "+nacion.toUpperCase()+" ====");
         return peliculaRepository.peliculaConcatenandoAnyo(nacion);
     }
 }

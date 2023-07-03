@@ -81,11 +81,13 @@ public class DirectorServiceImpl implements DirectorService{
 
     @Override
     public List<Object[]> directorParticipaciones(Long participaciones) {
+        System.out.println("======DIRECTORES CON "+participaciones+" PARTICIPACIONES EN PELICULAS====");
         return busquedaDirectorRepository.directorParticipaciones(participaciones);
     }
 
     @Override
     public List<Director> directorSinParticipaciones() {
+        System.out.println("=====DIRECTORES SIN PARTICIPACIONES EN PELICULAS====");
         return busquedaDirectorRepository.directorSinParticipaciones();
     }
 }
