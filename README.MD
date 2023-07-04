@@ -1,6 +1,6 @@
 # Cine Jpa-Hibernate
 
-Este proyecto consiste en generar de manera automatica las tablas de una base de datos de manera automatica, relacionarlas y hacer consultas en ellas por medio de las tecnologias de hibernate y Jpa usando como gestor de base de datos Mysql.
+Este proyecto consiste en generar de manera automatica las tablas de una base de datos, relacionarlas y hacer consultas en ellas por medio de las tecnologias de hibernate y Jpa usando como gestor de base de datos Mysql.
 
 
 > Los registros deben de ser introducidos antes de ejecutar el programa, de manera manual  y atraves del archivo "Insert.sql"que esta contenida en:
